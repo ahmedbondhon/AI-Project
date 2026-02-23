@@ -1,0 +1,56 @@
+#  DIU Student Performance Prediction & Analysis System
+
+**Course:** Artificial Intelligence (AI) Lab  
+**Institution:** Daffodil International University (DIU)  
+**Department:** Computing & Information System  
+**Batch:** 19-A | **Semester:** Spring 2026  
+**Student Name:** Nazmul Ahmed Bondhon  
+**Supervisor:** Dr. Md. Mizanur Rahoman  
+
+---
+
+##  Project Overview
+This project is an advanced Machine Learning system designed specifically for the Daffodil International University (DIU) grading scale. It predicts a student's **Final Letter Grade (A+ to F)** based strictly on their continuous pre-final assessment marks (Out of 60). This allows educators to identify at-risk students *before* the 40-mark Semester Final Examination and provide timely intervention.
+
+##  Advanced Features
+1. **DIU Custom Data Simulation:** Generates a highly realistic dataset of 1,000 students, strictly following the DIU Assessment Task marks (Attendance: 7, Class Test: 15, Assignment: 5, Presentation: 8, Midterm: 25).
+2. **Multi-Class Classification:** Uses an optimized Random Forest Classifier with Hyperparameter Tuning (via `GridSearchCV`) to predict 10 distinct letter grades rather than a simple binary Pass/Fail.
+3. **Interactive UI (Streamlit):** A modern, multi-page web application featuring:
+   - **Single Grade Predictor:** Interactive sliders to test individual student scenarios.
+   - **Bulk Class Predictor:** Allows teachers to upload a CSV of an entire roster and instantly download AI-predicted grades for the whole class.
+   - **Analytics Dashboard:** Displays dynamic insights including Feature Importance, Correlation Heatmaps, and the Model's Confusion Matrix.
+
+##  Project Structure
+```text
+Student-Performance-Prediction-Analysis-System/
+│
+├── data/                       # Contains raw and processed DIU datasets
+├── models/                     # Saved ML models and Label Encoders (.pkl)
+├── src/                        # Source code for data and model pipelines
+│   ├── data_preprocessing.py   
+│   ├── train_models.py         
+│   └── visualize.py            
+├── visualizations/             # Output folder for generated charts
+├── app.py                      # Main Streamlit web application
+├── generate_data.py            # Script to simulate DIU student data
+└── README.md                   # Project documentation
+ How to Run the Project
+Step 1: Install the required libraries
+
+Bash
+pip install pandas numpy scikit-learn matplotlib seaborn streamlit
+Step 2: Generate and process the DIU data
+
+Bash
+python generate_data.py
+python src/data_preprocessing.py
+Step 3: Train the multi-class models and generate visualizations
+
+Bash
+python src/train_models.py
+python src/visualize.py
+Step 4: Launch the User Interface
+
+Bash
+streamlit run app.py
+The web application will automatically open in your default browser at http://localhost:8501.

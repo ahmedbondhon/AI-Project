@@ -1,0 +1,23 @@
+student_performance_project/
+│
+├── data/                       # Directory for storing project data
+│   ├── raw_data.csv            # The original Kaggle or simulated dataset [cite: 28, 52]
+│   └── processed_data.csv      # Cleaned data after handling missing values and encoding [cite: 29, 30]
+│
+├── notebooks/                  # Jupyter notebooks for experimentation
+│   └── EDA_and_Modeling.ipynb  # Notebook for data preprocessing, training, and visualizations (Heatmaps, Confusion Matrix) [cite: 29, 38, 42, 45, 46]
+│
+├── models/                     # Directory to save trained model files (e.g., .pkl files)
+│   ├── logistic_regression.pkl # Saved Logistic Regression model [cite: 33]
+│   ├── decision_tree.pkl       # Saved Decision Tree Classifier model [cite: 35]
+│   └── random_forest.pkl       # Saved Random Forest Classifier model [cite: 36]
+│
+├── src/                        # Source code for data processing and model training
+│   ├── data_preprocessing.py   # Script to normalize numeric data and encode categorical data 
+│   └── train_models.py         # Script to split data (80-20), train models, and compare accuracy/F1-score [cite: 39, 40]
+│
+├── app.py                      # The main Streamlit file for the user interface where teachers/students get predictions 
+│
+├── requirements.txt            # List of required Python libraries (pandas, numpy, scikit-learn, matplotlib, seaborn, Streamlit) [cite: 50, 51]
+│
+└── README.md                   # Project documentation, setup instructions, and problem statement [cite: 13, 14, 15]
