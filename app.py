@@ -4,6 +4,8 @@ import pickle
 import shap
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
+import seaborn as sns
+from sklearn.metrics import confusion_matrix
 
 st.set_page_config(page_title="DIU Grade Predictor Pro", layout="wide", page_icon="🚀")
 
@@ -122,11 +124,52 @@ elif page == "Bulk Class Predictor":
             st.error(f"Error processing file. Details: {e}")
 
 # ==========================================
-# PAGE 3: DASHBOARD
+# PAGE 3: DYNAMIC ANALYTICS DASHBOARD
 # ==========================================
 elif page == "Analytics Dashboard":
     st.title("📊 DIU Assessment Analytics")
     tab1, tab2, tab3 = st.tabs(["Feature Importance", "Correlation", "Prediction Accuracy"])
-    with tab1: st.image('visualizations/feature_importance.png', use_container_width=True)
-    with tab2: st.image('visualizations/correlation_heatmap.png', use_container_width=True)
-    with tab3: st.image('visualizations/confusion_matrix.png', width=700)
+    
+    # We need to load the raw data here to draw the graphs
+    raw_df = pd.read_csv('data/raw_data.csv')
+    numeric_features = ['Attendance', 'Class_Test', 'Assignment', 'Presentation', 'Midterm']
+    
+    # --- TAB 1: Feature Importance ---
+    with tab1:
+        st.subheader("Which Assessments Impact the Final Grade Most?")
+        fig1, ax1 = plt.subplots(figsize=(8, 5))
+        importance = model.feature_importances_
+        sns.barplot(x=importance, y=numeric_features, palette='viridis', ax=ax1)
+        ax1.set_xlabel('Importance Score')
+        st.pyplot(fig1)
+
+    # --- TAB 2: Correlation Heatmap ---
+    with tab2:
+        st.subheader("Correlation Between Assessments")
+        fig2, ax2 = plt.subplots(figsize=(8, 6))
+        correlation_matrix = raw_df[numeric_features].corr()
+        sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f", linewidths=1, ax=ax2)
+        st.pyplot(fig2)
+
+    # --- TAB 3: Confusion Matrix ---
+    with tab3:
+        st.subheader("Prediction Accuracy (Confusion Matrix)")
+        
+        # AUTO-DETECT TARGET COLUMN: Looks for common grade column names, or defaults to the last column
+        possible_targets = ['Final_Grade', 'Grade', 'Result', 'Target', 'Class']
+        target_column = next((col for col in possible_targets if col in raw_df.columns), raw_df.columns[-1])
+        
+        try:
+            fig3, ax3 = plt.subplots(figsize=(8, 6))
+            scaled_features = scaler.transform(raw_df[numeric_features])
+            predictions = model.predict(scaled_features)
+            actual_labels = le.transform(raw_df[target_column])
+            
+            cm = confusion_matrix(actual_labels, predictions)
+            sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', 
+                        xticklabels=le.classes_, yticklabels=le.classes_, ax=ax3)
+            ax3.set_xlabel('Predicted Grade')
+            ax3.set_ylabel(f'Actual Grade (Column: {target_column})')
+            st.pyplot(fig3)
+        except Exception as e:
+            st.error(f"Could not generate Confusion Matrix. The auto-detected target column was '{target_column}'. Ensure your target labels match what the model was trained on. Error: {e}")
