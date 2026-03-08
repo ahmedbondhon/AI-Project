@@ -44,7 +44,7 @@ def train_and_evaluate():
     xgb_model.fit(X_train, y_train)
     y_pred_xgb = xgb_model.predict(X_test)
     
-    print(f"🚀 XGBoost Accuracy: {accuracy_score(y_test, y_pred_xgb):.4f}")
+    print(f" XGBoost Accuracy: {accuracy_score(y_test, y_pred_xgb):.4f}")
     
     # Save the new XGBoost model as our primary brain
     with open("models/xgboost_model.pkl", 'wb') as f:

@@ -7,7 +7,7 @@ from sklearn.preprocessing import StandardScaler
 import seaborn as sns
 from sklearn.metrics import confusion_matrix
 
-st.set_page_config(page_title="DIU Grade Predictor Pro", layout="wide", page_icon="🚀")
+st.set_page_config(page_title="DIU Grade Predictor Pro", layout="wide", page_icon="21")
 
 # --- 1. Load Model, Scaler, and Label Encoder ---
 @st.cache_resource
@@ -39,7 +39,7 @@ st.sidebar.info("**Course:** Artificial Intelligence\n\n**Student:** Nazmul Ahme
 # PAGE 1: SINGLE PREDICTOR & SHAP EXPLANATION
 # ==========================================
 if page == "Single Grade Predictor":
-    st.title("🚀 DIU Pre-Final Grade Predictor (Explainable AI)")
+    st.title("DIU Pre-Final Grade Predictor (Explainable AI)")
     st.write("Enter the student's continuous assessment marks (Total 60) to predict their Final Letter Grade.")
 
     col1, col2 = st.columns(2)
@@ -70,10 +70,10 @@ if page == "Single Grade Predictor":
         predicted_grade = le.inverse_transform([prediction_encoded])[0]
         
         st.divider()
-        st.success(f"### 🤖 AI Prediction: Based on current performance, the expected Final Grade is: **{predicted_grade}**")
+        st.success(f"###AI Prediction: Based on current performance, the expected Final Grade is: **{predicted_grade}**")
         
         # --- SHAP EXPLAINABLE AI ---
-        st.markdown("### 🧠 Why did the AI choose this grade?")
+        st.markdown("###Why did the AI choose this grade?")
         st.write("This **SHAP Waterfall Plot** shows exactly which marks pushed the prediction towards this specific grade, and which marks pulled it away.")
         
         try:
@@ -101,7 +101,7 @@ if page == "Single Grade Predictor":
 # PAGE 2: BULK CLASS PREDICTOR 
 # ==========================================
 elif page == "Bulk Class Predictor":
-    st.title("📂 Bulk Class Grade Prediction")
+    st.title("Bulk Class Grade Prediction")
     st.write("Upload a CSV file containing your entire class roster's continuous assessment marks to instantly predict everyone's Final Letter Grade.")
     
     uploaded_file = st.file_uploader("Upload Class CSV", type=["csv"])
@@ -127,7 +127,7 @@ elif page == "Bulk Class Predictor":
 # PAGE 3: DYNAMIC ANALYTICS DASHBOARD
 # ==========================================
 elif page == "Analytics Dashboard":
-    st.title("📊 DIU Assessment Analytics")
+    st.title("DIU Assessment Analytics")
     tab1, tab2, tab3 = st.tabs(["Feature Importance", "Correlation", "Prediction Accuracy"])
     
     # We need to load the raw data here to draw the graphs

@@ -24,7 +24,7 @@ scaler = StandardScaler()
 scaled_features = scaler.fit_transform(raw_df[numeric_features])
 
 # ==========================================
-# 📊 CHART 1: Feature Importance
+# CHART 1: Feature Importance
 # ==========================================
 print("Generating Feature Importance...")
 plt.figure(figsize=(8, 5))
@@ -38,7 +38,7 @@ plt.savefig('visualizations/feature_importance.png') # <--- SAVING THE IMAGE
 plt.close()
 
 # ==========================================
-# 📊 CHART 2: Correlation Heatmap
+# CHART 2: Correlation Heatmap
 # ==========================================
 print("Generating Correlation Heatmap...")
 plt.figure(figsize=(8, 6))
@@ -50,7 +50,7 @@ plt.savefig('visualizations/correlation_heatmap.png') # <--- SAVING THE IMAGE
 plt.close()
 
 # ==========================================
-# 📊 CHART 3: Confusion Matrix
+# CHART 3: Confusion Matrix
 # ==========================================
 print("Generating Confusion Matrix...")
 plt.figure(figsize=(8, 6))
@@ -70,4 +70,4 @@ plt.tight_layout()
 plt.savefig('visualizations/confusion_matrix.png') # <--- SAVING THE IMAGE
 plt.close()
 
-print("✅ All charts saved successfully in the 'visualizations' folder!")
+print("All charts saved successfully in the 'visualizations' folder!")
