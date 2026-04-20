@@ -59,8 +59,7 @@ plt.figure(figsize=(8, 6))
 predictions = model.predict(scaled_features)
 
 # NOTE: Change 'Final_Grade' if your CSV column is named differently!
-actual_labels = le.transform(raw_df['Final_Grade']) 
-
+actual_labels = le.transform(raw_df['Grade'])
 cm = confusion_matrix(actual_labels, predictions)
 sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=le.classes_, yticklabels=le.classes_)
 plt.title('Prediction Accuracy (Confusion Matrix)', fontsize=14)
