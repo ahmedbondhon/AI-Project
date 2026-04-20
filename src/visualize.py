@@ -11,7 +11,7 @@ def generate_visualizations():
     print("Loading DIU data and models...")
     df = pd.read_csv('data/processed_data.csv')
     
-    with open('models/random_forest.pkl', 'rb') as f:
+    with open('models/xgboost_model.pkl', 'rb') as f:
         rf_model = pickle.load(f)
         
     with open('models/label_encoder.pkl', 'rb') as f:
